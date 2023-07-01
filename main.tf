@@ -70,8 +70,6 @@ resource "aws_security_group" "sg" {
   }
 }
 
-#ec2
-
 resource "aws_instance" "instance" {
   ami                    = data.aws_ami.ami.id
   instance_type          = "t3.small"
@@ -82,7 +80,6 @@ resource "aws_instance" "instance" {
   }
 }
 
-#dns
 resource "aws_route53_record" "dns" {
   zone_id = "Z01993782D642NRX02CFC"
   name    = "${var.component}-dev"
@@ -90,8 +87,6 @@ resource "aws_route53_record" "dns" {
   ttl     = 30
   records = [aws_instance.instance.private_ip]
 }
-
-#null resource
 
 resource "null_resource" "ansible" {
   depends_on = [aws_instance.instance, aws_route53_record.dns]
