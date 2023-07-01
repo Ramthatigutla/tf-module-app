@@ -1,5 +1,3 @@
-#policy
-
 resource "aws_iam_policy" "policy" {
   name        = "${var.component}-${var.env}-ssm-pm-policy"
   path        = "/"
@@ -22,8 +20,6 @@ resource "aws_iam_policy" "policy" {
     ]
   })
 }
-
-#IAM ROLE
 resource "aws_iam_role" "role" {
   name = "${var.component}-${var.env}-ec2-role"
 
