@@ -65,9 +65,10 @@ resource "aws_security_group" "sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = {
-    Name = "${var.component}-${var.env}-sg"
-  }
+  tags = merge ({
+    Name = "${var.component}-${var.env}"
+  },
+  var.tags)
 }
 
 resource "aws_instance" "instance" {
